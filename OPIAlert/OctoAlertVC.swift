@@ -31,8 +31,10 @@ class OctoAlertVC: UIViewController {
     ]
     
     var bulit: String?
-
+    
     // MARK: - Outlets
+    @IBOutlet weak var tvHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var opiLbl: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var alertTitle: UILabel!
@@ -43,11 +45,32 @@ class OctoAlertVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.delegate = self
         view.addGestureRecognizer(tap)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        alertTitle.text = "Paja TITLE"
+        
+        //        tableView.layoutIfNeeded()
+        tableView.layoutSubviews()
+        tvHeight.constant = tableView.contentSize.height > 300 ? 300 : tableView.contentSize.height
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        }
+    }
+    
     
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -59,36 +82,17 @@ class OctoAlertVC: UIViewController {
         delegate?.confirmAction()
         dismissOctoAlert()
     }
-
+    
     @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
         dismissOctoAlert()
     }
     
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        opiLbl.textColor = UIColor.lightGray
-        opiLbl.numberOfLines = 0
-        opiLbl.attributedText = add(stringList: arrayString, font: opiLbl.font, bullet: bulit ?? "")
-        alertTitle.text = "Paja"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        }
-    }
-    
     // MARK: - Helper
     func dismissOctoAlert() {
-        opiLbl.isHidden = true
         alertTitle.isHidden = true
         okBtn.isHidden = true
         cancelBtn.isHidden = true
+        tableView.isHidden = true
         UIView.animate(withDuration: 0.3, animations: {
             self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
             self.containerView.backgroundColor = self.containerView.backgroundColor?.withAlphaComponent(0.0)
@@ -154,3 +158,33 @@ extension OctoAlertVC: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+extension OctoAlertVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AlertCell", for: indexPath)
+        cell.textLabel?.textColor = UIColor.lightGray
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.attributedText = add(stringList: arrayString, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
+        return cell
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
