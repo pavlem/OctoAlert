@@ -60,7 +60,12 @@ class OctoAlertVC: UIViewController {
         
         //        tableView.layoutIfNeeded()
         tableView.layoutSubviews()
-        tvHeight.constant = tableView.contentSize.height > 300 ? 300 : tableView.contentSize.height
+        
+        
+//        tvHeight.constant = tableView.contentSize.height > 300 ? 300 : tableView.contentSize.height
+        
+        tvHeight.constant = tableView.contentSize.height
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
