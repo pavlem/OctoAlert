@@ -8,9 +8,21 @@
 
 import UIKit
 
+protocol OctoAlertVCDelegate: class {
+    func cancelAction()
+    func confirmAction()
+}
+
+extension OctoAlertVCDelegate {
+    func cancelAction() {}
+    func confirmAction() {}
+}
+
 class OctoAlertVC: UIViewController {
     
     // MARK: - API
+    weak var delegate: OctoAlertVCDelegate?
+    
     var arrayString = [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -23,9 +35,9 @@ class OctoAlertVC: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var opiLbl: UILabel!
     @IBOutlet weak var containerView: UIView!
-    
-    
-    
+    @IBOutlet weak var alertTitle: UILabel!
+    @IBOutlet weak var okBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -37,20 +49,22 @@ class OctoAlertVC: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
-        // handling code
-        print("=====")
-        
-        
-        opiLbl.isHidden = true
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
-            self.containerView.backgroundColor = self.containerView.backgroundColor?.withAlphaComponent(0.0)
-
-        }) { (_) in
-            self.dismiss(animated: false, completion: nil)
-        }
+    // MARK: - Actions
+    @IBAction func cancelAction(_ sender: UIButton) {
+        delegate?.cancelAction()
+        dismissOctoAlert()
     }
+    
+    @IBAction func okAction(_ sender: UIButton) {
+        delegate?.confirmAction()
+        dismissOctoAlert()
+    }
+
+    @objc func handleTap(sender: UITapGestureRecognizer? = nil) {
+        dismissOctoAlert()
+    }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -58,6 +72,7 @@ class OctoAlertVC: UIViewController {
         opiLbl.textColor = UIColor.lightGray
         opiLbl.numberOfLines = 0
         opiLbl.attributedText = add(stringList: arrayString, font: opiLbl.font, bullet: bulit ?? "")
+        alertTitle.text = "Paja"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +83,21 @@ class OctoAlertVC: UIViewController {
         }
     }
     
-    // HELPER
+    // MARK: - Helper
+    func dismissOctoAlert() {
+        opiLbl.isHidden = true
+        alertTitle.isHidden = true
+        okBtn.isHidden = true
+        cancelBtn.isHidden = true
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
+            self.containerView.backgroundColor = self.containerView.backgroundColor?.withAlphaComponent(0.0)
+            
+        }) { (_) in
+            self.dismiss(animated: false, completion: nil)
+        }
+    }
+    
     func add(stringList: [String],
              font: UIFont,
              bullet: String = "\u{2022}",
