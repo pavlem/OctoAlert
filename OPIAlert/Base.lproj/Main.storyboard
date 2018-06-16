@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sk-SK-Gso">
-                                <rect key="frame" x="16" y="215.5" width="343" height="256.5"/>
+                                <rect key="frame" x="16" y="212.5" width="343" height="263"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-UH-w5W">
                                         <rect key="frame" x="8" y="20" width="327" height="21"/>
@@ -27,26 +27,27 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M44-n5-310">
-                                        <rect key="frame" x="8" y="48.5" width="327" height="80"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M44-n5-310">
+                                        <rect key="frame" x="8" y="49" width="327" height="72"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="6GD-an-gPn"/>
+                                            <constraint firstAttribute="height" constant="72" id="6GD-an-gPn"/>
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlertCell" id="QmH-4n-RLf">
                                                 <rect key="frame" x="0.0" y="28" width="327" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QmH-4n-RLf" id="kIB-KM-AWl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="327" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="1" green="0.95793924649999995" blue="0.95890770160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-yM-FCD">
-                                        <rect key="frame" x="8" y="136.5" width="327" height="44"/>
+                                        <rect key="frame" x="8" y="133" width="327" height="44"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="IJN-G7-DPX"/>
@@ -57,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-MO-8zD">
-                                        <rect key="frame" x="8" y="192.5" width="327" height="44"/>
+                                        <rect key="frame" x="8" y="189" width="327" height="44"/>
                                         <color key="backgroundColor" red="1" green="0.37468643550000003" blue="0.27476210919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hjs-lD-cEe"/>
@@ -78,18 +79,16 @@
                                     <constraint firstAttribute="trailing" secondItem="hXG-yM-FCD" secondAttribute="trailing" constant="8" id="WH8-QX-Dkm"/>
                                     <constraint firstItem="bHa-UH-w5W" firstAttribute="top" secondItem="7Sk-SK-Gso" secondAttribute="top" constant="20" id="WNq-IA-rTC"/>
                                     <constraint firstItem="M44-n5-310" firstAttribute="top" secondItem="bHa-UH-w5W" secondAttribute="bottom" constant="7.5" id="ZIU-PI-a3g"/>
-                                    <constraint firstAttribute="bottom" secondItem="tyx-MO-8zD" secondAttribute="bottom" constant="20" id="dAq-GH-U07"/>
+                                    <constraint firstAttribute="bottom" secondItem="tyx-MO-8zD" secondAttribute="bottom" constant="30" id="dAq-GH-U07"/>
                                     <constraint firstItem="tyx-MO-8zD" firstAttribute="top" secondItem="hXG-yM-FCD" secondAttribute="bottom" constant="12" id="eE9-uh-A50"/>
                                     <constraint firstItem="hXG-yM-FCD" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="8" id="gsH-CU-MdP"/>
-                                    <constraint firstItem="hXG-yM-FCD" firstAttribute="top" secondItem="M44-n5-310" secondAttribute="bottom" constant="8" id="nA5-xw-uGU"/>
+                                    <constraint firstItem="hXG-yM-FCD" firstAttribute="top" secondItem="M44-n5-310" secondAttribute="bottom" constant="12" id="nA5-xw-uGU"/>
                                     <constraint firstItem="M44-n5-310" firstAttribute="trailing" secondItem="bHa-UH-w5W" secondAttribute="trailing" id="qfO-Aq-8Mh"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.67656792529999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7Sk-SK-Gso" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="AuI-lr-duV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7Sk-SK-Gso" secondAttribute="bottom" constant="20" id="Kg4-l6-vlM"/>
                             <constraint firstItem="7Sk-SK-Gso" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="TGQ-dF-Sdi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Sk-SK-Gso" secondAttribute="trailing" constant="16" id="Uph-3l-HeF"/>
                             <constraint firstItem="7Sk-SK-Gso" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="saN-er-BhH"/>
@@ -101,8 +100,15 @@
                     <connections>
                         <outlet property="alertTitle" destination="bHa-UH-w5W" id="2Te-7h-qmU"/>
                         <outlet property="cancelBtn" destination="tyx-MO-8zD" id="KPQ-eA-j0y"/>
-                        <outlet property="containerView" destination="7Sk-SK-Gso" id="Pn6-ZO-fR7"/>
+                        <outlet property="cancelBtnHeight" destination="hjs-lD-cEe" id="fjT-wM-sf2"/>
+                        <outlet property="contentContainerView" destination="7Sk-SK-Gso" id="Pn6-ZO-fR7"/>
+                        <outlet property="csrtCancelBtnDown" destination="dAq-GH-U07" id="Jyu-aB-Ozo"/>
+                        <outlet property="csrtOkBtnDown" destination="eE9-uh-A50" id="1VR-Db-UaX"/>
+                        <outlet property="cstrTVDown" destination="nA5-xw-uGU" id="eLC-f3-B5N"/>
+                        <outlet property="cstrTitleDown" destination="ZIU-PI-a3g" id="L1h-3V-Zq5"/>
+                        <outlet property="cstrTitleUp" destination="WNq-IA-rTC" id="Qrj-sd-h3L"/>
                         <outlet property="okBtn" destination="hXG-yM-FCD" id="I0L-F4-ugk"/>
+                        <outlet property="okBtnHeight" destination="IJN-G7-DPX" id="Tpy-BY-OYV"/>
                         <outlet property="tableView" destination="M44-n5-310" id="Ubc-J9-ZS7"/>
                         <outlet property="tvHeight" destination="6GD-an-gPn" id="J1D-QF-aHM"/>
                     </connections>

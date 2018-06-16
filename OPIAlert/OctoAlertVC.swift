@@ -23,49 +23,100 @@ class OctoAlertVC: UIViewController {
     // MARK: - API
     weak var delegate: OctoAlertVCDelegate?
     
-    var arrayString = [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    ]
+//    func setBulitTxt(_ bulit: String, arrayOfText: [String]) {
+//        self.bulit = bulit
+//        self.arrayString = arrayOfText
+//    }
+//
+    func set(title: String?, message: String) {
+        alertTitleText = title
+        alertMessageText = message
+    }
     
-    var bulit: String?
-    
-    // MARK: - Outlets
-    @IBOutlet weak var tvHeight: NSLayoutConstraint!
+    func set(title: String?, bulitedMessage: [String], bulit: String? = "•") {
+        self.bulit = bulit
+        self.arrayString = bulitedMessage
+        self.title = title
+    }
+
+    var alertTitleText: String?
+    var alertMessageText: String?
+    var okBtnTitle: String?
+    var cancelBtnTitle: String?
+
+    // MARK: - Properties
+    // MARK: Vars
+    private var arrayString: [String]?
+    private var bulit: String?
+    // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var opiLbl: UILabel!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var alertTitle: UILabel!
     @IBOutlet weak var okBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
+    // Outlet - constraints
+    @IBOutlet weak var tvHeight: NSLayoutConstraint!
+    @IBOutlet weak var cstrTitleUp: NSLayoutConstraint!
+    @IBOutlet weak var cstrTitleDown: NSLayoutConstraint!
+    @IBOutlet weak var cstrTVDown: NSLayoutConstraint!
+    @IBOutlet weak var okBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var csrtOkBtnDown: NSLayoutConstraint!
+    @IBOutlet weak var cancelBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var csrtCancelBtnDown: NSLayoutConstraint!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tap.delegate = self
-        view.addGestureRecognizer(tap)
+        addTapGestureOnMainView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    
+        setTableView()
+    
+        let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - 2*20
+        let expandableHeight = cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + tableView.contentSize.height + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant
+        if expandableHeight > limitHeight {
+            tvHeight.constant = limitHeight - (cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant)
+        } else {
+            tvHeight.constant = tableView.contentSize.height
+            tableView.bounces = false
+        }
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        // BTNS
+        if okBtnTitle == nil {
+            okBtnHeight.constant = 0
+            okBtn.isHidden = true
+            okBtn.setTitle("", for: .normal)
+        } else {
+            okBtn.setTitle(okBtnTitle!, for: .normal)
+        }
         
-        alertTitle.text = "Paja TITLE"
-        
-        //        tableView.layoutIfNeeded()
-        tableView.layoutSubviews()
-        
-        
-//        tvHeight.constant = tableView.contentSize.height > 300 ? 300 : tableView.contentSize.height
-        
-        tvHeight.constant = tableView.contentSize.height
+        if cancelBtnTitle == nil {
+            cancelBtnHeight.constant = 0
+            cancelBtn.isHidden = true
+            cancelBtn.setTitle("", for: .normal)
+        } else {
+            cancelBtn.setTitle(cancelBtnTitle!, for: .normal)
+        }
 
+        if alertTitleText == nil {
+            cstrTitleDown.constant = 0
+            alertTitle.frame.size.height = 0
+            alertTitle.text = ""
+            alertTitle.isHidden = true
+        } else {
+            alertTitle.text = alertTitleText
+        }
+        setCornerRadius()
+    }
+    
+    func setCornerRadius() {
+        okBtn.layer.cornerRadius = 5
+        cancelBtn.layer.cornerRadius = 5
+        contentContainerView.layer.cornerRadius = 10
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +144,19 @@ class OctoAlertVC: UIViewController {
     }
     
     // MARK: - Helper
+    private func addTapGestureOnMainView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tap.delegate = self
+        view.addGestureRecognizer(tap)
+    }
+    
+    private func setTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.layoutSubviews()
+    }
+    
     func dismissOctoAlert() {
         alertTitle.isHidden = true
         okBtn.isHidden = true
@@ -100,7 +164,7 @@ class OctoAlertVC: UIViewController {
         tableView.isHidden = true
         UIView.animate(withDuration: 0.3, animations: {
             self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
-            self.containerView.backgroundColor = self.containerView.backgroundColor?.withAlphaComponent(0.0)
+            self.contentContainerView.backgroundColor = self.contentContainerView.backgroundColor?.withAlphaComponent(0.0)
             
         }) { (_) in
             self.dismiss(animated: false, completion: nil)
@@ -157,7 +221,7 @@ class OctoAlertVC: UIViewController {
 // MARK: - UIGestureRecognizerDelegate
 extension OctoAlertVC: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if containerView.bounds.contains(touch.location(in: containerView)) {
+        if contentContainerView.bounds.contains(touch.location(in: contentContainerView)) {
             return false
         }
         return true
@@ -174,7 +238,12 @@ extension OctoAlertVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlertCell", for: indexPath)
         cell.textLabel?.textColor = UIColor.lightGray
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.attributedText = add(stringList: arrayString, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
+        
+        if alertMessageText != nil {
+            cell.textLabel?.text = alertMessageText
+        } else if arrayString != nil {
+            cell.textLabel?.attributedText = add(stringList: arrayString!, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
+        }
         return cell
     }
 }

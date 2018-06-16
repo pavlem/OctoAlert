@@ -14,33 +14,28 @@ class ViewController: UIViewController {
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OctoAlertVC_ID") as? OctoAlertVC {
             vc.view.backgroundColor = UIColor.clear
             vc.modalPresentationStyle = .overFullScreen
-            vc.bulit = ""
-            vc.arrayString = [
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-            ]
+            
+            vc.set(title: nil, bulitedMessage: MocData.bulitedTxtLong)
+            
+//            vc.setBulitTxt("", arrayOfText: MocData.bulitedTxtLong)
+//            vc.messageLblText = MocData.lblTxt
             vc.delegate = self
+            vc.okBtnTitle = "OK_PAJA"
+            vc.cancelBtnTitle = "CANCEL_PAJA"
+            vc.alertTitleText = "PAKI TEST"
+            
             present(vc, animated: false, completion: nil)
         }
     }
 }
 
-
 extension ViewController: OctoAlertVCDelegate {
     func cancelAction() {
-        print("cancel PPPP")
+        print("cancelAction")
     }
     
     func confirmAction() {
-        print("cancel CONFIRM")
+        print("confirmAction")
     }
 }
 
