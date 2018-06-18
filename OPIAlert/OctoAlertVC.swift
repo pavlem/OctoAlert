@@ -45,17 +45,21 @@ class OctoAlertVC: UIViewController {
     var cancelBtnBackgroundColor = UIColor.clear
     var contentContanierBackgroundColor = UIColor.white
     
+
+    var bulitedTextFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    var bulitedTextFontColor = UIColor.gray
+    var bulitedTextLinespacing: CGFloat = 6
     
     
-    var bulitedTextFont: UIFont?
-    var textFont: UIFont?
-    
-    
+    var textFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    var textFontColor = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
     
     var titleFont = UIFont.systemFont(ofSize: 22, weight: .semibold)
     var titleFontColor = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
     
-    
+    var okBtnTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    var cancelBtnTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
+
 
     // MARK: - Properties
     // MARK: Vars
@@ -111,6 +115,7 @@ class OctoAlertVC: UIViewController {
             okBtn.setTitle("", for: .normal)
         } else {
             okBtn.setTitle(okBtnTitle!, for: .normal)
+            okBtn.titleLabel?.font = okBtnTitleFont
         }
         
         if cancelBtnTitle == nil {
@@ -119,6 +124,7 @@ class OctoAlertVC: UIViewController {
             cancelBtn.setTitle("", for: .normal)
         } else {
             cancelBtn.setTitle(cancelBtnTitle!, for: .normal)
+            cancelBtn.titleLabel?.font = cancelBtnTitleFont
         }
 
         if alertTitleText == nil {
@@ -139,10 +145,9 @@ class OctoAlertVC: UIViewController {
         super.viewDidAppear(animated)
         
         UIView.animate(withDuration: 0.3) {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
     }
-    
     
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -177,7 +182,6 @@ class OctoAlertVC: UIViewController {
         }
     }
 
-    
     private func addTapGestureOnMainView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.delegate = self
@@ -209,7 +213,7 @@ class OctoAlertVC: UIViewController {
              font: UIFont,
              bullet: String = "\u{2022}",
              indentation: CGFloat = 20,
-             lineSpacing: CGFloat = 2,
+             lineSpacing: CGFloat = 1.6,
              paragraphSpacing: CGFloat = 12,
              textColor: UIColor = .gray,
              bulletColor: UIColor = .gray) -> NSAttributedString {
@@ -242,8 +246,8 @@ class OctoAlertVC: UIViewController {
                 textAttributes,
                 range: NSMakeRange(0, attributedString.length))
             
-            let string:NSString = NSString(string: formattedString)
-            let rangeForBullet:NSRange = string.range(of: bullet)
+            let string = NSString(string: formattedString)
+            let rangeForBullet: NSRange = string.range(of: bullet)
             attributedString.addAttributes(bulletAttributes, range: rangeForBullet)
             bulletList.append(attributedString)
         }
@@ -276,7 +280,10 @@ extension OctoAlertVC: UITableViewDelegate, UITableViewDataSource {
         if alertMessageText != nil {
             cell.textLabel?.text = alertMessageText
         } else if arrayString != nil {
-            cell.textLabel?.attributedText = add(stringList: arrayString!, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
+//            cell.textLabel?.attributedText = add(stringList: arrayString!, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
+            
+            cell.textLabel?.attributedText = add(stringList: arrayString!, font: bulitedTextFont, bullet: bulit ?? "", lineSpacing: bulitedTextLinespacing, textColor: bulitedTextFontColor, bulletColor: bulitedTextFontColor)
+            
         }
         return cell
     }

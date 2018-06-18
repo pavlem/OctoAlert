@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sk-SK-Gso">
-                                <rect key="frame" x="16" y="180" width="343" height="308"/>
+                                <rect key="frame" x="16" y="174" width="343" height="320"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-UH-w5W">
                                         <rect key="frame" x="8" y="30" width="327" height="21"/>
@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M44-n5-310">
-                                        <rect key="frame" x="8" y="59" width="327" height="72"/>
+                                        <rect key="frame" x="8" y="71" width="327" height="72"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="6GD-an-gPn"/>
@@ -40,14 +40,14 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QmH-4n-RLf" id="kIB-KM-AWl">
                                                     <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" red="1" green="0.95793924649999995" blue="0.95890770160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-yM-FCD">
-                                        <rect key="frame" x="8" y="178" width="327" height="44"/>
+                                        <rect key="frame" x="8" y="190" width="327" height="44"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="IJN-G7-DPX"/>
@@ -58,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-MO-8zD">
-                                        <rect key="frame" x="8" y="234" width="327" height="44"/>
+                                        <rect key="frame" x="8" y="246" width="327" height="44"/>
                                         <color key="backgroundColor" red="1" green="0.37468643550000003" blue="0.27476210919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hjs-lD-cEe"/>
@@ -78,7 +78,7 @@
                                     <constraint firstItem="bHa-UH-w5W" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="8" id="OfT-Hh-9OV"/>
                                     <constraint firstAttribute="trailing" secondItem="hXG-yM-FCD" secondAttribute="trailing" constant="8" id="WH8-QX-Dkm"/>
                                     <constraint firstItem="bHa-UH-w5W" firstAttribute="top" secondItem="7Sk-SK-Gso" secondAttribute="top" constant="30" id="WNq-IA-rTC"/>
-                                    <constraint firstItem="M44-n5-310" firstAttribute="top" secondItem="bHa-UH-w5W" secondAttribute="bottom" constant="7.5" id="ZIU-PI-a3g"/>
+                                    <constraint firstItem="M44-n5-310" firstAttribute="top" secondItem="bHa-UH-w5W" secondAttribute="bottom" constant="20" id="ZIU-PI-a3g"/>
                                     <constraint firstAttribute="bottom" secondItem="tyx-MO-8zD" secondAttribute="bottom" constant="30" id="dAq-GH-U07"/>
                                     <constraint firstItem="tyx-MO-8zD" firstAttribute="top" secondItem="hXG-yM-FCD" secondAttribute="bottom" constant="12" id="eE9-uh-A50"/>
                                     <constraint firstItem="hXG-yM-FCD" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="8" id="gsH-CU-MdP"/>
