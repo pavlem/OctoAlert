@@ -33,6 +33,7 @@ class OctoAlertVC: UIViewController {
         self.arrayString = bulitedMessage
         self.title = title
     }
+    
     // Titles
     var alertTitleText: String?
     var alertMessageText: String?
@@ -219,8 +220,8 @@ class OctoAlertVC: UIViewController {
              textColor: UIColor = .gray,
              bulletColor: UIColor = .gray) -> NSAttributedString {
         
-        let textAttributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor]
-        let bulletAttributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: bulletColor]
+        let textAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor]
+        let bulletAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: bulletColor]
         
         let paragraphStyle = NSMutableParagraphStyle()
         let nonOptions = [NSTextTab.OptionKey: Any]()
@@ -272,32 +273,14 @@ extension OctoAlertVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlertCell", for: indexPath)
-        cell.textLabel?.textColor = UIColor.lightGray
+        cell.textLabel?.textColor = (alertMessageText != nil) ? OctoAlertVC.lightBlack : UIColor.gray
         cell.textLabel?.numberOfLines = 0
-        
         if alertMessageText != nil {
             cell.textLabel?.text = alertMessageText
+            cell.textLabel?.font = OctoAlertVC.systemFontRegular15
         } else if arrayString != nil {
-//            cell.textLabel?.attributedText = add(stringList: arrayString!, font: (cell.textLabel?.font)!, bullet: bulit ?? "")
-            
             cell.textLabel?.attributedText = add(stringList: arrayString!, font: bulitedTextFont, bullet: bulit ?? "", lineSpacing: bulitedTextLinespacing, textColor: bulitedTextFontColor, bulletColor: bulitedTextFontColor)
-            
         }
         return cell
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
