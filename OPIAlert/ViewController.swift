@@ -16,7 +16,8 @@ class ViewController: UIViewController {
             vc.modalPresentationStyle = .overFullScreen
             
             vc.set(title: nil, bulitedMessage: MocData.bulitedTxtLong)
-            
+//            vc.set(title: nil, bulitedMessage: MocData.bulitedTxt)
+
 //            vc.setBulitTxt("", arrayOfText: MocData.bulitedTxtLong)
 //            vc.messageLblText = MocData.lblTxt
             vc.delegate = self
