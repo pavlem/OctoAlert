@@ -246,7 +246,7 @@ class OctoAlertVC: UIViewController {
                 range: NSMakeRange(0, attributedString.length))
             
             let string = NSString(string: formattedString)
-            let rangeForBullet: NSRange = string.range(of: bullet)
+            let rangeForBullet = string.range(of: bullet)
             attributedString.addAttributes(bulletAttributes, range: rangeForBullet)
             bulletList.append(attributedString)
         }
