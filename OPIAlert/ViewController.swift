@@ -21,9 +21,10 @@ class ViewController: UIViewController {
 //            vc.setBulitTxt("", arrayOfText: MocData.bulitedTxtLong)
 //            vc.messageLblText = MocData.lblTxt
             vc.delegate = self
-            vc.okBtnTitle = "OK_PAJA"
-            vc.cancelBtnTitle = "CANCEL_PAJA"
+            vc.okBtnTitle = "OK"
+            vc.cancelBtnTitle = "Cancel"
             vc.alertTitleText = "Channel icon guidelines"
+//            vc.cancelBtnBackgroundColor = UIColor.lightGray
             
             
             present(vc, animated: false, completion: nil)

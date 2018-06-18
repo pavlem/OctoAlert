@@ -33,35 +33,35 @@ class OctoAlertVC: UIViewController {
         self.arrayString = bulitedMessage
         self.title = title
     }
-
+    // Titles
     var alertTitleText: String?
     var alertMessageText: String?
     var okBtnTitle: String?
     var cancelBtnTitle: String?
-    
+    // Buttons
     var okBtnTint = UIColor.white
-    var okBtnBackgroundColor = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
-    var cancelBtnTint = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
+    var okBtnBackgroundColor = lightPurple
+    var cancelBtnTint = lightPurple
     var cancelBtnBackgroundColor = UIColor.clear
     var contentContanierBackgroundColor = UIColor.white
-    
-
-    var bulitedTextFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    // Fonts
+    var bulitedTextFont = systemFontRegular15
     var bulitedTextFontColor = UIColor.gray
     var bulitedTextLinespacing: CGFloat = 6
-    
-    
-    var textFont = UIFont.systemFont(ofSize: 15, weight: .regular)
-    var textFontColor = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
-    
-    var titleFont = UIFont.systemFont(ofSize: 22, weight: .semibold)
-    var titleFontColor = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
-    
-    var okBtnTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-    var cancelBtnTitleFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-
+    var textFont = systemFontRegular15
+    var textFontColor = lightBlack
+    var titleFont = systemFontSemibold22
+    var titleFontColor = lightBlack
+    var okBtnTitleFont = systemFontSemibold17
+    var cancelBtnTitleFont = systemFontSemibold17
 
     // MARK: - Properties
+    // MARK: Constants
+    static let lightBlack = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
+    static let lightPurple = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
+    static let systemFontSemibold17 = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    static let systemFontSemibold22 = UIFont.systemFont(ofSize: 22, weight: .semibold)
+    static let systemFontRegular15 = UIFont.systemFont(ofSize: 15, weight: .regular)
     // MARK: Vars
     private var arrayString: [String]?
     private var bulit: String?
@@ -88,65 +88,18 @@ class OctoAlertVC: UIViewController {
         addTapGestureOnMainView()
     }
     
-    func setBtnsUI() {
-        okBtn.backgroundColor = okBtnBackgroundColor
-        okBtn.tintColor = okBtnTint
-        cancelBtn.backgroundColor = cancelBtnBackgroundColor
-        cancelBtn.tintColor = cancelBtnTint
-    }
-    
-    
-    func setUI() {
-        contentContainerView.backgroundColor = contentContanierBackgroundColor
-        setBtnsUI()
-        setContentContainerAndBtnsCornerRadius()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         setTableView()
-        setContentContainerLimits()
-        
-        // BTNS
-        if okBtnTitle == nil {
-            okBtnHeight.constant = 0
-            okBtn.isHidden = true
-            okBtn.setTitle("", for: .normal)
-        } else {
-            okBtn.setTitle(okBtnTitle!, for: .normal)
-            okBtn.titleLabel?.font = okBtnTitleFont
-        }
-        
-        if cancelBtnTitle == nil {
-            cancelBtnHeight.constant = 0
-            cancelBtn.isHidden = true
-            cancelBtn.setTitle("", for: .normal)
-        } else {
-            cancelBtn.setTitle(cancelBtnTitle!, for: .normal)
-            cancelBtn.titleLabel?.font = cancelBtnTitleFont
-        }
-
-        if alertTitleText == nil {
-            cstrTitleDown.constant = 0
-            alertTitle.frame.size.height = 0
-            alertTitle.text = ""
-            alertTitle.isHidden = true
-        } else {
-            alertTitle.text = alertTitleText
-            alertTitle.font = titleFont
-            alertTitle.textColor = titleFontColor
-        }
-        
+        setUIComponents()
         setUI()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.3) {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        }
+        animateBachgroundFadeIn()
     }
     
     // MARK: - Actions
@@ -165,7 +118,44 @@ class OctoAlertVC: UIViewController {
     }
     
     // MARK: - Helper
-    func setContentContainerAndBtnsCornerRadius() {
+    private func animateBachgroundFadeIn() {
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        }
+    }
+    
+    private func setUIComponents() {
+        setContentContainerLimits()
+        
+        set(button: okBtn, title: okBtnTitle, btnHeightCsrt: okBtnHeight, font: okBtnTitleFont)
+        set(button: cancelBtn, title: cancelBtnTitle, btnHeightCsrt: cancelBtnHeight, font: cancelBtnTitleFont)
+
+        if alertTitleText == nil {
+            cstrTitleDown.constant = 0
+            alertTitle.frame.size.height = 0
+            alertTitle.text = ""
+            alertTitle.isHidden = true
+        } else {
+            alertTitle.text = alertTitleText
+            alertTitle.font = titleFont
+            alertTitle.textColor = titleFontColor
+        }
+    }
+    
+    private func setBtnsUI() {
+        okBtn.backgroundColor = okBtnBackgroundColor
+        okBtn.tintColor = okBtnTint
+        cancelBtn.backgroundColor = cancelBtnBackgroundColor
+        cancelBtn.tintColor = cancelBtnTint
+    }
+    
+    private func setUI() {
+        contentContainerView.backgroundColor = contentContanierBackgroundColor
+        setBtnsUI()
+        setContentContainerAndBtnsCornerRadius()
+    }
+    
+    private func setContentContainerAndBtnsCornerRadius() {
         okBtn.layer.cornerRadius = 4
         cancelBtn.layer.cornerRadius = 4
         contentContainerView.layer.cornerRadius = 6
@@ -195,7 +185,18 @@ class OctoAlertVC: UIViewController {
         tableView.layoutSubviews()
     }
     
-    func dismissOctoAlert() {
+    private func set(button: UIButton, title: String?, btnHeightCsrt: NSLayoutConstraint, font: UIFont) {
+        if title == nil {
+            btnHeightCsrt.constant = 0
+            button.isHidden = true
+            button.setTitle("", for: .normal)
+        } else {
+            button.setTitle(title!, for: .normal)
+            button.titleLabel?.font = font
+        }
+    }
+    
+    private func dismissOctoAlert() {
         alertTitle.isHidden = true
         okBtn.isHidden = true
         cancelBtn.isHidden = true
@@ -209,7 +210,7 @@ class OctoAlertVC: UIViewController {
         }
     }
     
-    func add(stringList: [String],
+    private func add(stringList: [String],
              font: UIFont,
              bullet: String = "\u{2022}",
              indentation: CGFloat = 20,
@@ -226,9 +227,6 @@ class OctoAlertVC: UIViewController {
         paragraphStyle.tabStops = [
             NSTextTab(textAlignment: .left, location: indentation, options: nonOptions)]
         paragraphStyle.defaultTabInterval = indentation
-        //paragraphStyle.firstLineHeadIndent = 0
-        //paragraphStyle.headIndent = 20
-        //paragraphStyle.tailIndent = 1
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.paragraphSpacing = paragraphSpacing
         paragraphStyle.headIndent = indentation
