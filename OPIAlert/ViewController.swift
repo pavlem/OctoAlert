@@ -23,7 +23,8 @@ class ViewController: UIViewController {
             vc.delegate = self
             vc.okBtnTitle = "OK_PAJA"
             vc.cancelBtnTitle = "CANCEL_PAJA"
-            vc.alertTitleText = "PAKI TEST"
+            vc.alertTitleText = "Channel icon guidelines"
+            
             
             present(vc, animated: false, completion: nil)
         }

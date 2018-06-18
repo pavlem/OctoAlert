@@ -23,11 +23,6 @@ class OctoAlertVC: UIViewController {
     // MARK: - API
     weak var delegate: OctoAlertVCDelegate?
     
-//    func setBulitTxt(_ bulit: String, arrayOfText: [String]) {
-//        self.bulit = bulit
-//        self.arrayString = arrayOfText
-//    }
-//
     func set(title: String?, message: String) {
         alertTitleText = title
         alertMessageText = message
@@ -43,6 +38,24 @@ class OctoAlertVC: UIViewController {
     var alertMessageText: String?
     var okBtnTitle: String?
     var cancelBtnTitle: String?
+    
+    var okBtnTint = UIColor.white
+    var okBtnBackgroundColor = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
+    var cancelBtnTint = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
+    var cancelBtnBackgroundColor = UIColor.clear
+    var contentContanierBackgroundColor = UIColor.white
+    
+    
+    
+    var bulitedTextFont: UIFont?
+    var textFont: UIFont?
+    
+    
+    
+    var titleFont = UIFont.systemFont(ofSize: 22, weight: .semibold)
+    var titleFontColor = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
+    
+    
 
     // MARK: - Properties
     // MARK: Vars
@@ -71,19 +84,25 @@ class OctoAlertVC: UIViewController {
         addTapGestureOnMainView()
     }
     
+    func setBtnsUI() {
+        okBtn.backgroundColor = okBtnBackgroundColor
+        okBtn.tintColor = okBtnTint
+        cancelBtn.backgroundColor = cancelBtnBackgroundColor
+        cancelBtn.tintColor = cancelBtnTint
+    }
+    
+    
+    func setUI() {
+        contentContainerView.backgroundColor = contentContanierBackgroundColor
+        setBtnsUI()
+        setContentContainerAndBtnsCornerRadius()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         setTableView()
-    
-        let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - 2*20
-        let expandableHeight = cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + tableView.contentSize.height + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant
-        if expandableHeight > limitHeight {
-            tvHeight.constant = limitHeight - (cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant)
-        } else {
-            tvHeight.constant = tableView.contentSize.height
-            tableView.bounces = false
-        }
+        setContentContainerLimits()
         
         // BTNS
         if okBtnTitle == nil {
@@ -109,14 +128,11 @@ class OctoAlertVC: UIViewController {
             alertTitle.isHidden = true
         } else {
             alertTitle.text = alertTitleText
+            alertTitle.font = titleFont
+            alertTitle.textColor = titleFontColor
         }
-        setCornerRadius()
-    }
-    
-    func setCornerRadius() {
-        okBtn.layer.cornerRadius = 5
-        cancelBtn.layer.cornerRadius = 5
-        contentContainerView.layer.cornerRadius = 10
+        
+        setUI()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -144,6 +160,24 @@ class OctoAlertVC: UIViewController {
     }
     
     // MARK: - Helper
+    func setContentContainerAndBtnsCornerRadius() {
+        okBtn.layer.cornerRadius = 4
+        cancelBtn.layer.cornerRadius = 4
+        contentContainerView.layer.cornerRadius = 6
+    }
+    
+    private func setContentContainerLimits() {
+        let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - 2*20
+        let expandableHeight = cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + tableView.contentSize.height + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant
+        if expandableHeight > limitHeight {
+            tvHeight.constant = limitHeight - (cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant)
+        } else {
+            tvHeight.constant = tableView.contentSize.height
+            tableView.bounces = false
+        }
+    }
+
+    
     private func addTapGestureOnMainView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.delegate = self
@@ -178,7 +212,7 @@ class OctoAlertVC: UIViewController {
              lineSpacing: CGFloat = 2,
              paragraphSpacing: CGFloat = 12,
              textColor: UIColor = .gray,
-             bulletColor: UIColor = .red) -> NSAttributedString {
+             bulletColor: UIColor = .gray) -> NSAttributedString {
         
         let textAttributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor]
         let bulletAttributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: bulletColor]
