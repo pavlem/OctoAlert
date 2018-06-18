@@ -10,12 +10,13 @@
 		9E29C9E920D5036000DDA550 /* MocData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E29C9E820D5036000DDA550 /* MocData.swift */; };
 		9E9846BB20D3E3CC00AC18D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9846BA20D3E3CC00AC18D4 /* AppDelegate.swift */; };
 		9E9846BD20D3E3CC00AC18D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9846BC20D3E3CC00AC18D4 /* ViewController.swift */; };
-		9E9846C020D3E3CC00AC18D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9846BE20D3E3CC00AC18D4 /* Main.storyboard */; };
+		9E9846C020D3E3CC00AC18D4 /* OctoAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9846BE20D3E3CC00AC18D4 /* OctoAlert.storyboard */; };
 		9E9846C220D3E3CD00AC18D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E9846C120D3E3CD00AC18D4 /* Assets.xcassets */; };
 		9E9846C520D3E3CD00AC18D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9846C320D3E3CD00AC18D4 /* LaunchScreen.storyboard */; };
 		9E9846D020D3E3CD00AC18D4 /* OPIAlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9846CF20D3E3CD00AC18D4 /* OPIAlertTests.swift */; };
 		9E9846DB20D3E3CD00AC18D4 /* OPIAlertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9846DA20D3E3CD00AC18D4 /* OPIAlertUITests.swift */; };
 		9E9846E920D3EA2800AC18D4 /* OctoAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9846E820D3EA2800AC18D4 /* OctoAlertVC.swift */; };
+		9ED38AF320D7E4CB00D6C7FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ED38AF220D7E4CB00D6C7FB /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,7 @@
 		9E9846B720D3E3CB00AC18D4 /* OPIAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OPIAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9846BA20D3E3CC00AC18D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E9846BC20D3E3CC00AC18D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9E9846BF20D3E3CC00AC18D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9E9846BF20D3E3CC00AC18D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OctoAlert.storyboard; sourceTree = "<group>"; };
 		9E9846C120D3E3CD00AC18D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E9846C420D3E3CD00AC18D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E9846C620D3E3CD00AC18D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		9E9846DA20D3E3CD00AC18D4 /* OPIAlertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPIAlertUITests.swift; sourceTree = "<group>"; };
 		9E9846DC20D3E3CD00AC18D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9846E820D3EA2800AC18D4 /* OctoAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoAlertVC.swift; sourceTree = "<group>"; };
+		9ED38AF220D7E4CB00D6C7FB /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,8 @@
 			children = (
 				9E9846BA20D3E3CC00AC18D4 /* AppDelegate.swift */,
 				9E9846BC20D3E3CC00AC18D4 /* ViewController.swift */,
-				9E9846BE20D3E3CC00AC18D4 /* Main.storyboard */,
+				9E9846BE20D3E3CC00AC18D4 /* OctoAlert.storyboard */,
+				9ED38AF220D7E4CB00D6C7FB /* Main.storyboard */,
 				9E9846E820D3EA2800AC18D4 /* OctoAlertVC.swift */,
 				9E29C9E820D5036000DDA550 /* MocData.swift */,
 				9E9846C120D3E3CD00AC18D4 /* Assets.xcassets */,
@@ -237,7 +240,8 @@
 			files = (
 				9E9846C520D3E3CD00AC18D4 /* LaunchScreen.storyboard in Resources */,
 				9E9846C220D3E3CD00AC18D4 /* Assets.xcassets in Resources */,
-				9E9846C020D3E3CC00AC18D4 /* Main.storyboard in Resources */,
+				9E9846C020D3E3CC00AC18D4 /* OctoAlert.storyboard in Resources */,
+				9ED38AF320D7E4CB00D6C7FB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,12 +305,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9E9846BE20D3E3CC00AC18D4 /* Main.storyboard */ = {
+		9E9846BE20D3E3CC00AC18D4 /* OctoAlert.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9E9846BF20D3E3CC00AC18D4 /* Base */,
 			);
-			name = Main.storyboard;
+			name = OctoAlert.storyboard;
 			sourceTree = "<group>";
 		};
 		9E9846C320D3E3CD00AC18D4 /* LaunchScreen.storyboard */ = {

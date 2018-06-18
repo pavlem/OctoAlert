@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBAction func testAction(_ sender: UIButton) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OctoAlertVC_ID") as? OctoAlertVC {
+        if let vc = UIStoryboard(name: "OctoAlert", bundle: nil).instantiateViewController(withIdentifier: "OctoAlertVC_ID") as? OctoAlertVC {
             vc.set(title: "Channel icon guidelines", bulitedMessage: MocData.bulitedTxt, confirmBtnTitle: "OK", confirmIdentifier: "pajaC_ID", cancelIdentifier: "pajaCancel_ID")
             vc.delegate = self
             present(vc, animated: false, completion: nil)
