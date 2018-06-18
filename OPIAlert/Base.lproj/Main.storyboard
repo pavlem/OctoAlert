@@ -47,7 +47,7 @@
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-yM-FCD">
-                                        <rect key="frame" x="8" y="190" width="327" height="44"/>
+                                        <rect key="frame" x="15" y="190" width="313" height="44"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="IJN-G7-DPX"/>
@@ -58,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-MO-8zD">
-                                        <rect key="frame" x="8" y="246" width="327" height="44"/>
+                                        <rect key="frame" x="15" y="246" width="313" height="44"/>
                                         <color key="backgroundColor" red="1" green="0.37468643550000003" blue="0.27476210919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hjs-lD-cEe"/>
@@ -76,12 +76,12 @@
                                     <constraint firstAttribute="trailing" secondItem="bHa-UH-w5W" secondAttribute="trailing" constant="8" id="GG1-1Y-XMj"/>
                                     <constraint firstItem="M44-n5-310" firstAttribute="leading" secondItem="bHa-UH-w5W" secondAttribute="leading" id="JQ2-IW-NP1"/>
                                     <constraint firstItem="bHa-UH-w5W" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="8" id="OfT-Hh-9OV"/>
-                                    <constraint firstAttribute="trailing" secondItem="hXG-yM-FCD" secondAttribute="trailing" constant="8" id="WH8-QX-Dkm"/>
+                                    <constraint firstAttribute="trailing" secondItem="hXG-yM-FCD" secondAttribute="trailing" constant="15" id="WH8-QX-Dkm"/>
                                     <constraint firstItem="bHa-UH-w5W" firstAttribute="top" secondItem="7Sk-SK-Gso" secondAttribute="top" constant="30" id="WNq-IA-rTC"/>
                                     <constraint firstItem="M44-n5-310" firstAttribute="top" secondItem="bHa-UH-w5W" secondAttribute="bottom" constant="20" id="ZIU-PI-a3g"/>
                                     <constraint firstAttribute="bottom" secondItem="tyx-MO-8zD" secondAttribute="bottom" constant="30" id="dAq-GH-U07"/>
                                     <constraint firstItem="tyx-MO-8zD" firstAttribute="top" secondItem="hXG-yM-FCD" secondAttribute="bottom" constant="12" id="eE9-uh-A50"/>
-                                    <constraint firstItem="hXG-yM-FCD" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="8" id="gsH-CU-MdP"/>
+                                    <constraint firstItem="hXG-yM-FCD" firstAttribute="leading" secondItem="7Sk-SK-Gso" secondAttribute="leading" constant="15" id="gsH-CU-MdP"/>
                                     <constraint firstItem="hXG-yM-FCD" firstAttribute="top" secondItem="M44-n5-310" secondAttribute="bottom" constant="47" id="nA5-xw-uGU"/>
                                     <constraint firstItem="M44-n5-310" firstAttribute="trailing" secondItem="bHa-UH-w5W" secondAttribute="trailing" id="qfO-Aq-8Mh"/>
                                 </constraints>

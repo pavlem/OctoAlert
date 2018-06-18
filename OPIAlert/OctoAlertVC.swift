@@ -9,36 +9,44 @@
 import UIKit
 
 protocol OctoAlertVCDelegate: class {
-    func cancelAction()
-    func confirmAction()
+    func cancelAction(identifier: String?)
+    func confirmAction(identifier: String?)
 }
 
 extension OctoAlertVCDelegate {
-    func cancelAction() {}
-    func confirmAction() {}
+    func cancelAction(identifier: String?) {}
+    func confirmAction(identifier: String?) {}
 }
+
 
 class OctoAlertVC: UIViewController {
     
     // MARK: - API
     weak var delegate: OctoAlertVCDelegate?
     
-    func set(title: String?, message: String) {
-        alertTitleText = title
-        alertMessageText = message
+    func set(title: String?, message: String, confirmBtnTitle: String? = nil, cancelBtnTitle: String? = nil, confirmIdentifier: String? = nil, cancelIdentifier: String? = nil) {
+        self.alertTitleText = title
+        self.alertMessageText = message
+        self.confirmIdentifier = confirmIdentifier
+        self.cancelIdentifier = cancelIdentifier
+        self.okBtnTitle = confirmBtnTitle
+        self.cancelBtnTitle = cancelBtnTitle
+        view.backgroundColor = UIColor.clear
+        modalPresentationStyle = .overFullScreen
     }
     
-    func set(title: String?, bulitedMessage: [String], bulit: String? = "•") {
+    func set(title: String?, bulitedMessage: [String], bulit: String? = "•", confirmBtnTitle: String? = nil, cancelBtnTitle: String? = nil, confirmIdentifier: String? = nil, cancelIdentifier: String? = nil) {
         self.bulit = bulit
-        self.arrayString = bulitedMessage
-        self.title = title
+        self.alertMessageBulitText = bulitedMessage
+        self.alertTitleText = title
+        self.confirmIdentifier = confirmIdentifier
+        self.cancelIdentifier = cancelIdentifier
+        self.okBtnTitle = confirmBtnTitle
+        self.cancelBtnTitle = cancelBtnTitle
+        view.backgroundColor = UIColor.clear
+        modalPresentationStyle = .overFullScreen
     }
-    
-    // Titles
-    var alertTitleText: String?
-    var alertMessageText: String?
-    var okBtnTitle: String?
-    var cancelBtnTitle: String?
+   
     // Buttons
     var okBtnTint = UIColor.white
     var okBtnBackgroundColor = lightPurple
@@ -64,8 +72,14 @@ class OctoAlertVC: UIViewController {
     static let systemFontSemibold22 = UIFont.systemFont(ofSize: 22, weight: .semibold)
     static let systemFontRegular15 = UIFont.systemFont(ofSize: 15, weight: .regular)
     // MARK: Vars
-    private var arrayString: [String]?
+    private var alertMessageBulitText: [String]?
     private var bulit: String?
+    private var alertTitleText: String?
+    private var alertMessageText: String?
+    private var confirmIdentifier: String?
+    private var cancelIdentifier: String?
+    private var okBtnTitle: String?
+    private var cancelBtnTitle: String?
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var contentContainerView: UIView!
@@ -91,7 +105,7 @@ class OctoAlertVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+
         setTableView()
         setUIComponents()
         setUI()
@@ -105,12 +119,12 @@ class OctoAlertVC: UIViewController {
     
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
-        delegate?.cancelAction()
+        delegate?.cancelAction(identifier: cancelIdentifier)
         dismissOctoAlert()
     }
     
     @IBAction func okAction(_ sender: UIButton) {
-        delegate?.confirmAction()
+        delegate?.confirmAction(identifier: confirmIdentifier)
         dismissOctoAlert()
     }
     
@@ -162,8 +176,10 @@ class OctoAlertVC: UIViewController {
         contentContainerView.layer.cornerRadius = 6
     }
     
-    private func setContentContainerLimits() {
-        let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - 2*20
+    private func setContentContainerLimits() {    
+        let containerTopPadding: CGFloat = 20
+        let containerBottomPadding: CGFloat = 20
+        let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - (containerTopPadding + containerBottomPadding)
         let expandableHeight = cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + tableView.contentSize.height + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant
         if expandableHeight > limitHeight {
             tvHeight.constant = limitHeight - (cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant)
@@ -278,8 +294,8 @@ extension OctoAlertVC: UITableViewDelegate, UITableViewDataSource {
         if alertMessageText != nil {
             cell.textLabel?.text = alertMessageText
             cell.textLabel?.font = OctoAlertVC.systemFontRegular15
-        } else if arrayString != nil {
-            cell.textLabel?.attributedText = add(stringList: arrayString!, font: bulitedTextFont, bullet: bulit ?? "", lineSpacing: bulitedTextLinespacing, textColor: bulitedTextFontColor, bulletColor: bulitedTextFontColor)
+        } else if alertMessageBulitText != nil {
+            cell.textLabel?.attributedText = add(stringList: alertMessageBulitText!, font: bulitedTextFont, bullet: bulit ?? "", lineSpacing: bulitedTextLinespacing, textColor: bulitedTextFontColor, bulletColor: bulitedTextFontColor)
         }
         return cell
     }
