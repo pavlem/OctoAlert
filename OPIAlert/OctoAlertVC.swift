@@ -18,7 +18,6 @@ extension OctoAlertVCDelegate {
     func confirmAction(identifier: String?) {}
 }
 
-
 class OctoAlertVC: UIViewController {
     
     // MARK: - API
@@ -46,7 +45,7 @@ class OctoAlertVC: UIViewController {
         view.backgroundColor = UIColor.clear
         modalPresentationStyle = .overFullScreen
     }
-   
+    
     // Buttons
     var okBtnTint = UIColor.white
     var okBtnBackgroundColor = lightPurple
@@ -63,11 +62,11 @@ class OctoAlertVC: UIViewController {
     var titleFontColor = lightBlack
     var okBtnTitleFont = systemFontSemibold17
     var cancelBtnTitleFont = systemFontSemibold17
-
+    
     // MARK: - Properties
     // MARK: Constants
-    static let lightBlack = UIColor(red:0.13, green:0.15, blue:0.19, alpha:0.9)
-    static let lightPurple = UIColor(red:0.25, green:0.3, blue:0.72, alpha:1)
+    static let lightBlack = UIColor(red: 0.13, green:0.15, blue:0.19, alpha:0.9)
+    static let lightPurple = UIColor(red: 0.25, green:0.3, blue:0.72, alpha:1)
     static let systemFontSemibold17 = UIFont.systemFont(ofSize: 17, weight: .semibold)
     static let systemFontSemibold22 = UIFont.systemFont(ofSize: 22, weight: .semibold)
     static let systemFontRegular15 = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -80,6 +79,11 @@ class OctoAlertVC: UIViewController {
     private var cancelIdentifier: String?
     private var okBtnTitle: String?
     private var cancelBtnTitle: String?
+    // MARK: Constants
+    let btnCornerRadius: CGFloat = 4
+    let contentContainerCornerRadius: CGFloat = 6
+    let containerTopPadding: CGFloat = 20
+    let containerBottomPadding: CGFloat = 20
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var contentContainerView: UIView!
@@ -105,7 +109,7 @@ class OctoAlertVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         setTableView()
         setUIComponents()
         setUI()
@@ -144,17 +148,23 @@ class OctoAlertVC: UIViewController {
         
         set(button: okBtn, title: okBtnTitle, btnHeightCsrt: okBtnHeight, font: okBtnTitleFont)
         set(button: cancelBtn, title: cancelBtnTitle, btnHeightCsrt: cancelBtnHeight, font: cancelBtnTitleFont)
-
-        if alertTitleText == nil {
+        
+        if cancelBtnTitle == nil {
+            csrtOkBtnDown.constant = 0
+        }
+        
+        guard alertTitleText != nil else {
             cstrTitleDown.constant = 0
             alertTitle.frame.size.height = 0
             alertTitle.text = ""
             alertTitle.isHidden = true
-        } else {
-            alertTitle.text = alertTitleText
-            alertTitle.font = titleFont
-            alertTitle.textColor = titleFontColor
+            
+            return
         }
+        
+        alertTitle.text = alertTitleText
+        alertTitle.font = titleFont
+        alertTitle.textColor = titleFontColor
     }
     
     private func setBtnsUI() {
@@ -171,14 +181,12 @@ class OctoAlertVC: UIViewController {
     }
     
     private func setContentContainerAndBtnsCornerRadius() {
-        okBtn.layer.cornerRadius = 4
-        cancelBtn.layer.cornerRadius = 4
-        contentContainerView.layer.cornerRadius = 6
+        okBtn.layer.cornerRadius = btnCornerRadius
+        cancelBtn.layer.cornerRadius = btnCornerRadius
+        contentContainerView.layer.cornerRadius = contentContainerCornerRadius
     }
     
-    private func setContentContainerLimits() {    
-        let containerTopPadding: CGFloat = 20
-        let containerBottomPadding: CGFloat = 20
+    private func setContentContainerLimits() {
         let limitHeight = (UIApplication.shared.keyWindow?.frame.height)! - (containerTopPadding + containerBottomPadding)
         let expandableHeight = cstrTitleUp.constant + alertTitle.frame.size.height + cstrTitleDown.constant + tableView.contentSize.height + cstrTVDown.constant + okBtnHeight.constant + csrtOkBtnDown.constant + cancelBtnHeight.constant + csrtCancelBtnDown.constant
         if expandableHeight > limitHeight {
@@ -188,7 +196,7 @@ class OctoAlertVC: UIViewController {
             tableView.bounces = false
         }
     }
-
+    
     private func addTapGestureOnMainView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.delegate = self
@@ -203,38 +211,29 @@ class OctoAlertVC: UIViewController {
     }
     
     private func set(button: UIButton, title: String?, btnHeightCsrt: NSLayoutConstraint, font: UIFont) {
-        if title == nil {
+        guard title != nil else {
             btnHeightCsrt.constant = 0
             button.isHidden = true
             button.setTitle("", for: .normal)
-        } else {
-            button.setTitle(title!, for: .normal)
-            button.titleLabel?.font = font
+            return
         }
+        
+        button.setTitle(title!, for: .normal)
+        button.titleLabel?.font = font
     }
     
     private func dismissOctoAlert() {
-        alertTitle.isHidden = true
-        okBtn.isHidden = true
-        cancelBtn.isHidden = true
-        tableView.isHidden = true
+        contentContainerView.isHidden = true
+        
         UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
-            self.contentContainerView.backgroundColor = self.contentContainerView.backgroundColor?.withAlphaComponent(0.0)
             
+            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0.0)
         }) { (_) in
             self.dismiss(animated: false, completion: nil)
         }
     }
     
-    private func add(stringList: [String],
-             font: UIFont,
-             bullet: String = "\u{2022}",
-             indentation: CGFloat = 20,
-             lineSpacing: CGFloat = 1.6,
-             paragraphSpacing: CGFloat = 12,
-             textColor: UIColor = .gray,
-             bulletColor: UIColor = .gray) -> NSAttributedString {
+    private func add(stringList: [String], font: UIFont, bullet: String = "\u{2022}", indentation: CGFloat = 20, lineSpacing: CGFloat = 1.6, paragraphSpacing: CGFloat = 12, textColor: UIColor = .gray, bulletColor: UIColor = .gray) -> NSAttributedString {
         
         let textAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor]
         let bulletAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: bulletColor]
@@ -253,13 +252,9 @@ class OctoAlertVC: UIViewController {
             let formattedString = "\(bullet)\t\(string)\n"
             let attributedString = NSMutableAttributedString(string: formattedString)
             
-            attributedString.addAttributes(
-                [NSAttributedStringKey.paragraphStyle : paragraphStyle],
-                range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes( [NSAttributedStringKey.paragraphStyle: paragraphStyle], range: NSMakeRange(0, attributedString.length))
             
-            attributedString.addAttributes(
-                textAttributes,
-                range: NSMakeRange(0, attributedString.length))
+            attributedString.addAttributes( textAttributes, range: NSMakeRange(0, attributedString.length))
             
             let string = NSString(string: formattedString)
             let rangeForBullet = string.range(of: bullet)
